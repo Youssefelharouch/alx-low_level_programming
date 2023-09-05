@@ -1,44 +1,42 @@
-/**
-* alloc_grid - function that allocates memory for a 2D grid of integers
-* @width: width of the grid
-* @height: height of the grid
-* Return: pointer to the newly allocated grid or
-* NULL if width or height is <= 0
-* Author: NourMellal
-*/
 #include "main.h"
-int **alloc_grid(int width, int height)
+
+/**
+ * str_concat - Concatenates two strings into newly allocated space in memory
+ *
+ * @s1: The first string to concatenate
+ * @s2: The second string to concatenate
+ *
+ * Return: On success, returns a pointer to the concatenated string. If memory
+ *         allocation fails, returns NULL.
+ *
+ * Author: Nour Mellal
+ */
+char *str_concat(char *s1, char *s2)
 {
-int **twod;
-int hgt_index, wid_index;
+	char *cont_str;
+	int i, cont_i = 0, len = 0;
 
-if (width <= 0 || height <= 0)
-	return (NULL);
+	if (s1 == NULL)
+		s1 = "";
 
-twod = malloc(sizeof(int *) * height);
+	if (s2 == NULL)
+		s2 = "";
 
-if (twod == NULL)
-	return (NULL);
+	for (i = 0; s1[i] || s2[i]; i++)
+		len++;
 
-for (hgt_index = 0; hgt_index < height; hgt_index++)
-{
-	twod[hgt_index] = malloc(sizeof(int) * width);
+	cont_str = malloc(sizeof(char) * len);
 
-	if (twod[hgt_index] == NULL)
-	{
-		for (; hgt_index >= 0; hgt_index--)
-			free(twod[hgt_index]);
-
-		free(twod);
+	if (cont_str == NULL)
 		return (NULL);
-	}
-}
 
-for (hgt_index = 0; hgt_index < height; hgt_index++)
-{
-	for (wid_index = 0; wid_index < width; wid_index++)
-		twod[hgt_index][wid_index] = 0;
-}
-return (twod);
+	for (i = 0; s1[i]; i++)
+		cont_str[cont_i++] = s1[i];
 
+	for (i = 0; s2[i]; i++)
+		cont_str[cont_i++] = s2[i];
+
+	cont_str[cont_i] = '\0';
+
+	return (cont_str);
 }
