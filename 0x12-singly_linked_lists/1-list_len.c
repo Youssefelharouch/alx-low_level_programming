@@ -17,4 +17,4 @@ size_t list_len(const list_t *h)
 		elem++;
 	}
 	return (elem);
-sh: 1: q: not found
+}
